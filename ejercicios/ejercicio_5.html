@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <script>
+        const filtrar = (longitud, n) => {
+            const palabras_filtradas = [];
+
+            for (const palabra of longitud) {
+                if (palabra.length >= n) {
+                    palabras_filtradas.push(palabra);
+                }
+            }
+            return palabras_filtradas;
+        };
+
+        let animales = ["perro", "iguana", "oso", "panda", "elefante", "cobra"];
+        let longitud_minima = 6;
+        console.log(`original ${animales}, la longitud minima es: ${longitud_minima}`);
+
+        let filtrado = filtrar(animales, longitud_minima)
+        console.log("animales filtrados", filtrado)
+
+    </script>
+</body>
+</html>

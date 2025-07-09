@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11</title>
+</head>
+<body>
+    <script>
+        const fizzBuzzBazz = () => {
+        for (let i = 1; i <= 100; i++) {
+            let output = ""; //salida de datos
+
+            // Múltiplo de 3, 5 y 7
+            if (i % 3 === 0 && i % 5 === 0 && i % 7 === 0) {
+            output = "FizzBuzzBazz";
+            }
+            // Múltiplo de 3 y 5
+            else if (i % 3 === 0 && i % 5 === 0) {
+            output = "FizzBuzz";
+            }
+            // Múltiplo de 3 y 7
+            else if (i % 3 === 0 && i % 7 === 0) {
+            output = "FizzBazz";
+            }
+            // Múltiplo de 5 y 7
+            else if (i % 5 === 0 && i % 7 === 0) {
+            output = "BuzzBazz";
+            }
+            // Solo Múltiplo de 3
+            else if (i % 3 === 0) {
+            output = "Fizz";
+            }
+            // Solo Múltiplo de 5
+            else if (i % 5 === 0) {
+            output = "Buzz";
+            }
+            // Solo Múltiplo de 7
+            else if (i % 7 === 0) {
+            output = "Bazz";
+            }
+            else {
+            output = i;
+            }
+
+            console.log(output);
+        }
+        };
+
+        console.log("FizzBuzzBazz del 1 al 100");
+        fizzBuzzBazz();
+
+    </script>
+</body>
+</html>

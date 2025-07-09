@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 14</title>
+</head>
+<body>
+    <script>
+        const fibonacci = (N) => {
+            if (N < 0) {
+                console.log("N debe ser un número positivo.");
+                return [];
+            }
+            if (N === 0) {
+                return [0];
+            }
+
+            const fibSerie = [0, 1]; 
+            let a = 0;
+            let b = 1;
+            let siguienteTermino = a + b;
+
+            while (siguienteTermino <= N) {
+                fibSerie.push(siguienteTermino);
+                a = b;
+                b = siguienteTermino;
+                siguienteTermino = a + b;
+            }
+            return fibSerie;
+        };
+
+        console.log("...Serie Fibonacci hasta N...");
+        console.log("Fibonacci hasta 10:", fibonacci(20));
+
+    </script>
+</body>
+</html>

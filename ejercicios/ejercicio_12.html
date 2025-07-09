@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12</title>
+</head>
+<body>
+    <script>
+        const imprimirPiramideNumeros = (n) => {
+        if (n <= 0) {
+            console.log("El número de filas debe ser un entero positivo.");
+            return;
+        }
+
+        for (let i = 1; i <= n; i++) {
+            let fila = ""; //construir la fila de números de la fila actual
+
+            for (let j = 1; j <= i; j++) {
+            fila += j;
+            }
+
+            console.log(fila);
+        }
+        };
+        console.log("piramide 1 fila");
+        imprimirPiramideNumeros(1);
+
+        console.log("pirámide 3 filas");
+        imprimirPiramideNumeros(3);
+
+        console.log("pirámide de 5 filas");
+        imprimirPiramideNumeros(5);
+
+    </script>
+</body>
+</html>

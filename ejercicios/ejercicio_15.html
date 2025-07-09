@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 15</title>
+</head>
+<body>
+    <script>
+        const maximoProductoDeTres = (pro) => {
+        if (pro.length < 3) {
+            console.log("El array debe contener al menos 3 números.");
+            return null;
+        }
+        
+        //a. ordenar  de forma ascendente
+        pro.sort((a, b) => a - b); // usamos .scort() y ordena de menor a mayor
+
+        const n = pro.length;
+
+        //b. Calcular los dos posibles productos máximos
+        //números más grandes al final del array
+        const producto1 = pro[n - 1] * pro[n - 2] * pro[n - 3];
+
+        //números más pequeños (más negativos) al principio
+        const producto2 = pro[0] * pro[1] * pro[n - 1];
+
+        //c. mostrar el mayor de los dos productos
+        return Math.max(producto1, producto2);
+        };
+
+        console.log("...Máximo Producto de Tres...");
+
+        let ducto1 = [1, 2, 3, 4, 5];
+        console.log(`producto: [${ducto1}] -> Máximo producto: ${maximoProductoDeTres(ducto1)}`);
+
+        let ducto2 = [-1, -2, -3, 10, 20];
+        console.log(`producto: [${ducto2}] -> Máximo producto: ${maximoProductoDeTres(ducto2)}`);
+
+        let ducto3 = [-10, -5, 1, 2, 3];
+        console.log(`producto: [${ducto3}] -> Máximo producto: ${maximoProductoDeTres(ducto3)}`);
+
+    </script>
+</body>
+</html>

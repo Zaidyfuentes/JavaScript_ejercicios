@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 25</title>
+</head>
+<body>
+    <script>
+        const rutaMinimaBFS = (matriz, inicio, fin) => {
+        const filas = matriz.length;
+        const columnas = matriz[0].length;
+        const direcciones = [
+            [-1, 0],
+            [1, 0],
+            [0, -1],
+            [0, 1]
+        ];
+
+        const cola = [];
+        const visitados = new Set();
+        const [inicioFila, inicioColumna] = inicio;
+        const [finFila, finColumna] = fin;
+
+        if (inicioFila < 0 || inicioFila >= filas || inicioColumna < 0 || inicioColumna >= columnas ||
+            matriz[inicioFila][inicioColumna] === 1) {
+            console.warn("Inicio inválido (fuera de límites o bloqueado).");
+            return -1;
+        }
+        if (finFila < 0 || finFila >= filas || finColumna < 0 || finColumna >= columnas ||
+            matriz[finFila][finColumna] === 1) {
+            console.warn("Fin inválido (fuera de límites o bloqueado).");
+            return -1;
+        }
+        
+        if (inicioFila === finFila && inicioColumna === finColumna) {
+            return 0;
+        }
+
+        cola.push([inicioFila, inicioColumna, 0]);
+        visitados.add(`${inicioFila},${inicioColumna}`);
+
+        while (cola.length > 0) {
+            const [filaActual, colActual, pasosActuales] = cola.shift();
+
+            if (filaActual === finFila && colActual === finColumna) {
+            return pasosActuales;
+            }
+
+            for (const [dr, dc] of direcciones) {
+            const nuevaFila = filaActual + dr;
+            const nuevaColumna = colActual + dc;
+
+            const esValido = nuevaFila >= 0 && nuevaFila < filas &&
+                            nuevaColumna >= 0 && nuevaColumna < columnas &&
+                            matriz[nuevaFila][nuevaColumna] === 0 &&
+                            !visitados.has(`${nuevaFila},${nuevaColumna}`);
+
+            if (esValido) {
+                visitados.add(`${nuevaFila},${nuevaColumna}`);
+                cola.push([nuevaFila, nuevaColumna, pasosActuales + 1]);
+            }
+            }
+        }
+        return -1;
+        };
+        console.log("...Ruta Mínima en Matriz 0-1 (BFS)...");
+        const matriz1 = [
+        [0, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 1, 0]
+        ];
+
+        console.log("\nMatriz 1:");
+        console.log(matriz1.map(row => row.join(' ')).join('\n'));
+
+        console.log("\nCaso 1: Ruta existente");
+        console.log(`Ruta de (0,0) a (3,3): ${rutaMinimaBFS(matriz1, [0, 0], [3, 3])} pasos`);
+        
+    </script>
+</body>
+</html>

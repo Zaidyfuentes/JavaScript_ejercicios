@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 28</title>
+</head>
+<body>
+    <script>
+        let listaAlumnos = [];
+        let nextAlumnoId = 1;
+
+        const crearAlumno = (nombre, edad, grado) => {
+        if (typeof nombre !== 'string' || nombre.trim() === '') {
+            console.error("Error: El nombre del alumno no puede estar vacío.");
+            return null;
+        }
+        if (typeof edad !== 'number' || edad <= 0) {
+            console.error("Error: La edad del alumno debe ser un número positivo.");
+            return null;
+        }
+        const nuevoAlumno = {
+            id: nextAlumnoId++,
+            nombre: nombre.trim(),
+            edad: edad,
+            grado: grado
+        };
+        listaAlumnos.push(nuevoAlumno);
+        console.log(`Alumno "${nuevoAlumno.nombre}" (ID: ${nuevoAlumno.id}) creado.`);
+        return nuevoAlumno;
+        };
+
+        const leerTodosAlumnos = () => {
+        console.log("...Lista de Alumnos...");
+        if (listaAlumnos.length === 0) {
+            console.log("No hay alumnos registrados.");
+            return [];
+        }
+        
+        for (const alumno of listaAlumnos) {
+            console.log(`ID: ${alumno.id}, Nombre: ${alumno.nombre}, Edad: ${alumno.edad}, Grado: ${alumno.grado}`);
+        }
+        return listaAlumnos;
+        };
+
+        const leerAlumnoPorId = (idBuscado) => {
+        const alumnoEncontrado = listaAlumnos.find(alumno => alumno.id === idBuscado);
+        if (alumnoEncontrado) {
+            console.log(`\nAlumno encontrado (ID ${idBuscado}): ${alumnoEncontrado.nombre}`);
+        } else {
+            console.log(`\nAlumno con ID ${idBuscado} no encontrado.`);
+        }
+        return alumnoEncontrado;
+        };
+
+        const actualizarAlumno = (idAActualizar, nuevosDatos) => {
+        const indice = listaAlumnos.findIndex(alumno => alumno.id === idAActualizar);
+
+        if (indice !== -1) {
+            listaAlumnos[indice] = { ...listaAlumnos[indice], ...nuevosDatos };
+            console.log(`Alumno con ID ${idAActualizar} actualizado.`);
+            return listaAlumnos[indice];
+        } else {
+            console.error(`No se pudo actualizar: Alumno con ID ${idAActualizar} no encontrado.`);
+            return null;
+        }
+        };
+
+        const borrarAlumno = (idABorrar) => {
+        const longitudOriginal = listaAlumnos.length;
+        listaAlumnos = listaAlumnos.filter(alumno => alumno.id !== idABorrar);
+
+        if (listaAlumnos.length < longitudOriginal) {
+            console.log(`Alumno con ID ${idABorrar} borrado.`);
+            return true;
+        } else {
+            console.error(`No se pudo borrar: Alumno con ID ${idABorrar} no encontrado.`);
+            return false;
+        }
+        };
+
+        console.log("\n--- Operaciones CRUD para Alumnos ---");
+        const alumno1 = crearAlumno("Maria López", 20, "Diseño");
+        const alumno2 = crearAlumno("Pedro Gomez", 22, "Desarrollo");
+        const alumno3 = crearAlumno("Ana García", 19, "Marketing");
+        crearAlumno("", 18, "Cursos");
+        crearAlumno("Luis", 0, "Ingeniería");
+
+        leerTodosAlumnos();
+
+        leerAlumnoPorId(alumno2.id);
+        leerAlumnoPorId(999);
+
+        actualizarAlumno(alumno1.id, { edad: 21, grado: "Diseño Avanzado" });
+        actualizarAlumno(999, { nombre: "Fake" });
+
+        leerTodosAlumnos();
+
+        borrarAlumno(alumno3.id);
+        borrarAlumno(999);
+
+        leerTodosAlumnos();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 26</title>
+</head>
+<body>
+    <script>
+        let tareas = [];
+        let nextTaskId = 1;
+        const agregarTarea = (descripcion) => {//1.agregar Tarea
+        if (typeof descripcion !== 'string' || descripcion.trim() === '') {
+            console.error("Error: La descripción de la tarea no puede estar vacía.");
+            return null;
+        }
+        const nuevaTarea = {
+            id: nextTaskId++,
+            desc: descripcion.trim(),
+            done: false
+        };
+        tareas.push(nuevaTarea);
+        console.log(`Tarea '${nuevaTarea.desc}' (ID: ${nuevaTarea.id}) agregada.`);
+        return nuevaTarea;
+        };
+
+        const completarTarea = (idTarea) => {//2. completar Tarea
+        const tareaEncontrada = tareas.find(tarea => tarea.id === idTarea);
+
+        if (tareaEncontrada) {
+            if (tareaEncontrada.done) {
+            console.log(`ℹLa tarea '${tareaEncontrada.desc}' (ID: ${idTarea}) ya estaba completada.`);
+            } else {
+            tareaEncontrada.done = true;
+            console.log(`Tarea '${tareaEncontrada.desc}' (ID: ${idTarea}) marcada como completada.`);
+            }
+            return true;
+        } else {
+            console.error(`Error: Tarea con ID ${idTarea} no encontrada.`);
+            return false;
+        }
+        };
+
+        const eliminarTarea = (idTarea) => {//3.eliminar Tarea
+        const longitudOriginal = tareas.length;
+        tareas = tareas.filter(tarea => tarea.id !== idTarea);
+
+        if (tareas.length < longitudOriginal) {
+            console.log(`Tarea con ID ${idTarea} eliminada.`);
+            return true;
+        } else {
+            console.error(`Error: Tarea con ID ${idTarea} no encontrada para eliminar.`);
+            return false;
+        }
+        };
+
+        const listarTareasPendientes = () => {//4. Tareas Pendientes
+        console.log("\n...Tareas Pendientes...");
+        const tareasPendientes = tareas.filter(tarea => !tarea.done);
+
+        if (tareasPendientes.length === 0) {
+            console.log("¡No hay tareas pendientes!");
+        } else {
+            tareasPendientes.forEach(tarea => {
+            console.log(`[ID: ${tarea.id}] ${tarea.desc}`);
+            });
+        }
+        return tareasPendientes;
+        };
+
+        const listarTodasLasTareas = () => {//5.listar TODAS las Tareas
+        console.log("\n--- Todas las Tareas (Pendientes y Completadas) ---");
+        if (tareas.length === 0) {
+            console.log("No hay tareas en la lista.");
+            return [];
+        }
+        tareas.forEach(tarea => {
+            const estado = tarea.done ? "COMPLETA" : "PENDIENTE";
+            console.log(`[ID: ${tarea.id}] ${tarea.desc} (${estado})`);
+        });
+        return tareas;
+        };
+
+        console.log("...Gestor de Tareas...");
+        agregarTarea("Comprar víveres");
+        agregarTarea("Pagar la factura del internet"); 
+        listarTodasLasTareas();
+
+    </script>
+</body>
+</html>

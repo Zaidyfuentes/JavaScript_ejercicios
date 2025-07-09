@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+</head>
+<body>
+    <script>
+        const caja_cambio = {
+            tasas: {
+                USD: 1.0,
+                EUR: 0.92,
+                GBP: 0.79,
+                JPY: 155.0,
+            },
+
+            convertir: function(monto, deMoneda, aMoneda) {
+                const de = deMoneda.toUpperCase();
+                const a = aMoneda.toUpperCase();
+
+                if (!this.tasas[de] || !this.tasas[a]) {
+                    console.log(`error: monedas no soportadas, revise ${de} o ${a}.`)
+                    return null;
+                }
+
+                let montoBase = monto / this.tasas[de];
+                let montoConvertido = montoBase * this.tasas[a];
+
+                return montoConvertido.toFixed(2);
+            },
+
+            actualizarTasa: function(moneda, nuevaTasa) {
+                const mon = moneda.toUpperCase();
+                if (this.tasas[mon]) {
+                    this.tasas[mon] = nuevaTasa;
+                    console.log(`tasa de ${mon} actualizada a ${nuevaTasa}`);
+                } else {
+                    console.log(`error: la moneda ${mon} no existe para actualizar`);
+                }
+            },
+        };
+
+        console.log("conversiones iniciales");
+        console.log("100 USD a EUR:", caja_cambio.convertir(100, "USD", "EUR"));
+        console.log("50 EUR a GPB:", caja_cambio.convertir(50, "EUR", "GBP"))
+        console.log("200 JPY a USD:", caja_cambio.convertir(200, "JPY", "USD"))
+
+        console.log("actualizando una tasa");
+        caja_cambio.actualizarTasa("EUR", 0.95);
+        console.log("Nueva tasa EUR", caja_cambio.tasas.EUR);
+        console.log("ahora 100 USD a EUR:", caja_cambio.convertir(100, "USD", "EUR"))
+
+    </script>
+</body>
+</html>

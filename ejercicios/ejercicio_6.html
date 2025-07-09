@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+<body>
+    <script>
+        const crear_libro = (titulo, autor, año) => {
+            return {
+                titulo: titulo,
+                autor: autor,
+                año: año,
+
+                resumen: function(){
+                    return `${this.titulo}, fue escrito por ${this.autor} en el año ${año}.`;
+                },
+                esAntiguio: function() {
+                    const año_actual = new Date().getFullYear();
+                    const edad_libro = año_actual - this.año;
+
+                    return edad_libro > 20;
+                }
+            }
+        }
+
+        const libro_ejemplo = crear_libro("Cien años de soledad", "Gabriel Garcia Marquez", 1997);
+        console.log("libro", libro_ejemplo);
+        console.log("resumen del libro", libro_ejemplo.resumen());
+        console.log("¿el libro es antiguo?", libro_ejemplo.esAntiguio());
+
+    </script>
+</body>
+</html>

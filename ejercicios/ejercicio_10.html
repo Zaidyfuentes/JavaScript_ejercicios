@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10</title>
+</head>
+<body>
+    <script>
+
+        //a. generar carta
+        const crearCarta = (palo, valor) => {
+            return {
+                palo: palo,
+                valor: valor,
+                // Método toString() mostrar la carta como texto
+                toString: function() {
+                // Devolverá algo como "As de Picas"
+                return `${this.valor} de ${this.palo}`;
+                }
+            };
+        };
+
+        //b. creacion de la baraja
+        const palos = ["Corazones", "Diamantes", "Tréboles", "Picas"];
+        const valores = ["As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+
+        const baraja = [];
+
+        for (const palo of palos) {
+            for (const valor of valores) {
+                const nuevaCarta = crearCarta(palo, valor);
+                baraja.push(nuevaCarta);
+            }
+        }
+
+        console.log("...Una Carta de Ejemplo...");
+        const miCarta = crearCarta("corazon", "10");
+        console.log("Mi carta es:", miCarta.toString());
+
+        console.log("Baraja Completa (primeros y últimos elementos)");
+        console.log("Número total de cartas en la baraja:", baraja.length);
+
+        console.log("Primera carta:", baraja[0].toString());
+        console.log("Segunda carta:", baraja[1].toString());
+
+    </script>
+</body>
+</html>

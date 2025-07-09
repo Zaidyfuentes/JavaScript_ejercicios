@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <script>
+        const contar = (colores) => {
+            const contador_objetos = {};
+            
+            for (const elemento of colores) {
+                if (contador_objetos[elemento]) {
+                    contador_objetos[elemento]++;
+                } else {
+                    contador_objetos[elemento] = 1;
+                }
+            }
+            return contador_objetos;
+        }
+
+        let color = ["azul", "amarillo", "verde", "verde", "azul", "morado", "rojo", "blanco", "rojo", "rojo", "azul", "rojo", "rojo"];
+        console.log("lista de colores", color);
+
+        let contador_de_colores = contar(color);
+        console.log("contador de colores", contador_de_colores);
+    </script>
+</body>
+</html>

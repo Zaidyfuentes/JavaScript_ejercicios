@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 21</title>
+</head>
+<body>
+    <script>
+        const esAnagrama = (cadena1, cadena2) => {
+            const normalizarYOrdenar = (cadena) => {
+                return cadena
+                .toLowerCase()//convertir a minúsculas
+                .replace(/\s/g, '') //eliminar espacios en blanco global
+                .split('')//convertir la cadena en caracteres
+                .sort()//ordenar el array de caracteres alfabéticamente
+                .join('');//unir el array de caracteres de nuevo en una cadena
+            };
+
+        // Normalizamos y ordenamos ambas cadenas
+        const cadenaNormalizada1 = normalizarYOrdenar(cadena1);
+        const cadenaNormalizada2 = normalizarYOrdenar(cadena2);
+
+        return cadenaNormalizada1 === cadenaNormalizada2;
+        };
+        console.log("...Anagrama...");
+
+        console.log("Caso 1: Anagramas básicos");
+        console.log(`"listen", "silent": ${esAnagrama("listen", "silent")}`);
+        console.log(`"roma", "amor": ${esAnagrama("roma", "amor")}`);
+
+    </script>
+</body>
+</html>

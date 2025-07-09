@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 22</title>
+</head>
+<body>
+    <script>
+        const romanoAEntero = (romano) => {
+        const valoresRomanos = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        };
+
+        let total = 0;
+        for (let i = 0; i < romano.length; i++) {
+            const caracterActual = romano[i];
+            const valorActual = valoresRomanos[caracterActual];
+
+            const caracterSiguiente = romano[i + 1];
+            const valorSiguiente = valoresRomanos[caracterSiguiente];
+
+            if (valorSiguiente && valorActual < valorSiguiente) {
+            total -= valorActual;
+            } else {
+            total += valorActual;
+            }
+        }
+        return total;
+        };
+        console.log("...Romanos a Enteros...");
+
+        console.log(`"III" -> ${romanoAEntero("III")}`);
+        console.log(`"IV" -> ${romanoAEntero("IV")}`);
+        console.log(`"IX" -> ${romanoAEntero("IX")}`);
+                
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+<body>
+    <script>
+        let inventarioProductos =  [
+            {id: 1, nombre: "laptop", stock: 10},
+            {id: 2, nombre: "mouse", stock: 25},
+            {id: 3, nombre: "teclado", stock: 0},
+            {id: 4, nombre: "monitor", stock: 7},
+            {id: 5, nombre: "camara", stock: 15}
+        ];
+
+        //a. buscar un producto
+        const buscar = (inventario, idBuscando) => {
+            for (const producto of inventario) {
+                if (producto.id === idBuscando) {
+                    return producto;
+                }
+            }
+            return null;
+        };
+
+        //b. vender productos(restar stock)
+        const venderProductos = (inventario, idProducto, cantidad) => {
+            const producto = buscar(inventario, idProducto);
+            if (producto) {
+                if (producto.stock >= cantidad) {
+                producto.stock -= cantidad;
+                console.log(`venta exitosa: ${cantidad} unidades de ${producto.nombre}, nuevo stock: ${producto.stock}`);
+                return true;
+                } else {
+                console.log(`error, no hay suficiente stock de ${producto.nombre}, stock actual: ${producto.stock}`);
+                return false;
+                }
+            } else {
+                console.log(`error: producto con ID ${idProducto} no encontrado`);
+                return false;
+            }
+        };
+
+        //c. listar los productos con stock
+        const listarStockProductos = (inventario) => {
+            const productosStock = [];
+
+            for (const producto of inventario) {
+                if (producto.stock > 0) {
+                    productosStock.push(producto);
+                }
+            }
+            return productosStock;
+        };
+
+        console.log("...inventraio inicial...");
+        console.log(inventarioProductos);
+
+        console.log("...a. buscar productos por id...");
+        let productoEncontrado1 = buscar(inventarioProductos, 2);
+        console.log("producto con id 2:", productoEncontrado1);
+
+        let productoEncontrado2 = buscar(inventarioProductos, 4);
+        console.log("producto con id 2:", productoEncontrado2);
+
+        console.log("...b. vender unidades...");
+        venderProductos(inventarioProductos, 2, 3);
+        venderProductos(inventarioProductos, 4, 5);
+
+        console.log(".inventario despues de la compra.");
+        console.log(inventarioProductos);
+
+        console.log("...c. listar productos con stock positivo...");
+        let stockFinal = listarStockProductos(inventarioProductos);
+        console.log("productos con stock positivo:", stockFinal);
+
+    </script>
+</body>
+</html>

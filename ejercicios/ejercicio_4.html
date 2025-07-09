@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+    <script>
+        const suma_numerica = (susu) => {
+            const resultado = [];
+
+            for (let i = 0; i< susu.length -1; i++) {
+                const suma = susu[i] + susu[i+1];
+                resultado.push(suma);
+            }
+            return resultado;
+        };
+
+        let numer_ing = [2, 3, 4, 5];
+        console.log("numeros ingresados", numer_ing);
+
+        let sumados = suma_numerica(numer_ing);
+        console.log("resultado de las sumas", sumados);
+
+    </script>
+</body>
+</html>

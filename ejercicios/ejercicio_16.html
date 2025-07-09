@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 16</title>
+</head>
+<body>
+    <script>
+        const mezclarConfigs = (defaults, overrides) => {
+
+        return {
+            ...defaults, 
+            ...overrides 
+        };
+        };
+
+        console.log("...mezcalr configuraciones..");
+
+        let configPorDefecto = {
+        theme: "dark",
+        fontSize: 16,
+        notifications: true,
+        language: "en"
+        };
+
+        let misPreferencias = {
+        fontSize: 18,
+        notifications: false,
+        language: "es",
+        cache: true
+        };
+
+        let configFinal = mezclarConfigs(configPorDefecto, misPreferencias);
+        console.log("Configuración por defecto:", configPorDefecto);
+        console.log("Mis preferencias:", misPreferencias);
+        console.log("Configuración final:", configFinal);
+
+    </script>
+</body>
+</html>

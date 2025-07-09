@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 19t</title>
+</head>
+<body>
+    <script>
+        const clonarYActualizarEmail = (usuarioOriginal, nuevoEmail) => {
+        const usuarioClonado = { ...usuarioOriginal };//clonar
+
+        usuarioClonado.email = nuevoEmail;//actualizar email
+
+        return usuarioClonado;
+        };
+
+        console.log("...clonar y actualizar el email...");
+
+        let usuarioInicial = {
+        id: 1,
+        nombre: "Alice",
+        email: "alice@example.com",
+        edad: 30
+        };
+        console.log("Usuario Original ANTES de clonar y actualizar:", usuarioInicial);
+
+        let emailNuevo = "alice.new@example.com";
+        let usuarioModificado = clonarYActualizarEmail(usuarioInicial, emailNuevo);
+
+        console.log("\nUsuario MODIFICADO (clonado):", usuarioModificado);
+
+    </script>
+</body>
+</html>

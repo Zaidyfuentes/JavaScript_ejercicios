@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 23</title>
+</head>
+<body>
+    <script>
+        const comprimir = (cadena) => {
+        let resultado = "";
+        let i = 0;
+        if (cadena.length === 0) {
+            return "";
+        }
+        while (i < cadena.length) {
+            const caracterActual = cadena[i];
+            let contador = 0;
+            let j = i;
+            while (j < cadena.length && cadena[j] === caracterActual) {
+            contador++;
+            j++;
+            }
+            resultado += caracterActual + contador;
+            i = j;
+        }
+        return resultado;
+        };
+
+        console.log("--- Compresión RLE ---");
+        console.log(`"aaabbc" -> "${comprimir("aaabbc")}"`);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 30</title>
+</head>
+<body>
+    <script>
+        const generarContrasenaSegura = (longitud, opciones = {}) => {
+        const caracteresMinusculas = "abcdefghijklmnopqrstuvwxyz";
+        const caracteresMayusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const caracteresNumeros = "0123456789";
+        const caracteresSimbolos = "!@#$%^&*()_-+=[]{}|;:,.<>?";
+
+        const {
+            incluirMayusculas = true,
+            incluirNumeros = true,
+            incluirSimbolos = true
+        } = opciones;
+
+        let poolCaracteres = caracteresMinusculas;
+        
+        if (incluirMayusculas) {
+            poolCaracteres += caracteresMayusculas;
+        }
+        if (incluirNumeros) {
+            poolCaracteres += caracteresNumeros;
+        }
+        if (incluirSimbolos) {
+            poolCaracteres += caracteresSimbolos;
+        }
+
+        if (longitud <= 0 || !Number.isInteger(longitud)) {
+            console.error("Error: La longitud debe ser un número entero positivo.");
+            return "";
+        }
+        if (poolCaracteres.length === 0) {
+            console.error("Error: No hay caracteres disponibles para generar la contraseña. Habilita al menos una opción.");
+            return "";
+        }
+
+        let minLengthRequired = 0;
+        if (true) minLengthRequired++; //Minusculas siempre
+        if (incluirMayusculas) minLengthRequired++;
+        if (incluirNumeros) minLengthRequired++;
+        if (incluirSimbolos) minLengthRequired++;
+
+        if (longitud < minLengthRequired) {
+            console.error(`Error: La longitud (${longitud}) es demasiado corta. Necesita al menos ${minLengthRequired} caracteres para asegurar todos los tipos seleccionados.`);
+            return "";
+        }
+
+        let contrasena = [];
+        if (incluirMayusculas) {
+            contrasena.push(caracteresMayusculas[Math.floor(Math.random() * caracteresMayusculas.length)]);
+        }
+        if (incluirNumeros) {
+            contrasena.push(caracteresNumeros[Math.floor(Math.random() * caracteresNumeros.length)]);
+        }
+        if (incluirSimbolos) {
+            contrasena.push(caracteresSimbolos[Math.floor(Math.random() * caracteresSimbolos.length)]);
+        }
+        contrasena.push(caracteresMinusculas[Math.floor(Math.random() * caracteresMinusculas.length)]);
+
+        while (contrasena.length < longitud) {
+            const caracterAleatorio = poolCaracteres[Math.floor(Math.random() * poolCaracteres.length)];
+            contrasena.push(caracterAleatorio);
+        }
+
+        for (let i = contrasena.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [contrasena[i], contrasena[j]] = [contrasena[j], contrasena[i]];
+        }
+
+        return contrasena.join('');
+        };
+
+        console.log("...Generador de Contraseñas Seguras...");
+
+        console.log(`10 caracteres (completa): ${generarContrasenaSegura(10)}`);
+
+        console.log(`8 caracteres (min + num): ${generarContrasenaSegura(8, { incluirMayusculas: false, incluirSimbolos: false })}`);
+
+    </script>
+</body>
+</html>

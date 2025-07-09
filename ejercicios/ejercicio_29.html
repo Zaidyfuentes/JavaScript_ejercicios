@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercico 29</title>
+</head>
+<body>
+    <script>
+        const preguntasTrivia = [
+        {
+            texto: "¿Cuál es la capital de Francia?",
+            opciones: ["Berlín", "Madrid", "París", "Roma"],
+            respuestaCorrecta: 2
+        },
+        {
+            texto: "¿Cuántos planetas hay en nuestro sistema solar?",
+            opciones: ["7", "8", "9", "10"],
+            respuestaCorrecta: 1
+        },
+        {
+            texto: "¿Cuál es el animal terrestre más grande?",
+            opciones: ["Elefante africano", "Ballena azul", "Jirafa", "Rinoceronte"],
+            respuestaCorrecta: 0 
+        },
+        {
+            texto: "¿En qué año se lanzó JavaScript?",
+            opciones: ["1990", "1995", "2000", "2005"],
+            respuestaCorrecta: 1
+        }
+        ];
+
+        const iniciarTrivia = (respuestasUsuario = []) => {
+        let puntaje = 0;
+        console.log("...¡Bienvenido a la Trivia de Conocimientos!...");
+        console.log("Responde las siguientes preguntas. Ingresa el número de la opción.");
+
+        for (let i = 0; i < preguntasTrivia.length; i++) {
+            const preguntaActual = preguntasTrivia[i];
+            console.log(`..Pregunta ${i + 1}/${preguntasTrivia.length}..`);
+            console.log(preguntaActual.texto);
+
+            preguntaActual.opciones.forEach((opcion, index) => {
+            console.log(`${index + 1}. ${opcion}`);
+            });
+
+            const respuestaUsuario = respuestasUsuario[i]; // 
+            console.log(`(Tu respuesta simulada: ${respuestaUsuario})`);
+
+            if (respuestaUsuario - 1 === preguntaActual.respuestaCorrecta) {
+            console.log("¡Correcto!");
+            puntaje++;
+            } else {
+            console.log(`Incorrecto. La respuesta correcta era: ${preguntaActual.opciones[preguntaActual.respuestaCorrecta]}`);
+            }
+        }
+
+        console.log("...Trivia Terminada...");
+        console.log(`Tu puntaje final es: ${puntaje} de ${preguntasTrivia.length}`);
+        const porcentaje = (puntaje / preguntasTrivia.length) * 100;
+        console.log(`Porcentaje de acierto: ${porcentaje.toFixed(2)}%`);
+
+        return puntaje;
+        };
+
+        console.log("--- Simulador de Trivia ---");
+        const respuestasPerfectas = [3, 2, 1, 2];
+        console.log("\n--- Ronda 1: Respuestas Perfectas ---");
+        iniciarTrivia(respuestasPerfectas);
+
+        const respuestasMixtas = [1, 2, 3, 4];
+        console.log("\n--- Ronda 2: Respuestas Mixtas ---");
+        iniciarTrivia(respuestasMixtas);
+
+    </script>
+</body>
+</html>

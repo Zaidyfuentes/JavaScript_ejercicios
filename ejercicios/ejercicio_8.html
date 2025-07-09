@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<body>
+    <script>
+        const crearContador = (inicial) => {
+            let conteo = inicial;
+
+            return {
+                inc: function() {
+                    conteo++;
+                    console.log(`contador incrementado a: ${conteo}`);
+                },
+
+                dec: function() {
+                    conteo--;
+                    console.log(`contador incrementado a: ${conteo}`)
+                },
+
+                valor: function() {
+                    return conteo;
+                }
+            };
+        };
+
+        const miContador = crearContador(0);
+        console.log("contador inicial:", miContador.valor());
+
+        miContador.inc();
+        miContador.inc();
+        console.log("valor actual despues de incrementar el contador dos veces", miContador.valor());
+
+        miContador.inc();
+        miContador.dec();
+        console.log("valor actual despues de incrementar el contador una vez y decrementar dos veces", miContador.valor());
+
+    </script>
+</body>
+</html>

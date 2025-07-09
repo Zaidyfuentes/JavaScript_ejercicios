@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 24</title>
+</head>
+<body>
+    <script>
+        const validarParentesis = (cadena) => {
+        const pares = {
+            ')': '(',
+            ']': '[',
+            '}': '{'
+        };
+        const aperturas = new Set(['(', '[', '{']);
+        const pila = [];
+
+        for (let i = 0; i < cadena.length; i++) {
+            const char = cadena[i];
+
+            if (aperturas.has(char)) {
+            pila.push(char);
+            }
+            else if (pares[char]) {
+            if (pila.length === 0 || pila.pop() !== pares[char]) {
+                return false;
+            }
+            }
+        }
+        return pila.length === 0;
+        };
+
+        console.log("... Validación de Paréntesis...");
+        console.log(`"()" -> ${validarParentesis("()")}`);
+        console.log(`"()[]{}" -> ${validarParentesis("()[]{}")}`);
+        console.log(`"{[]}" -> ${validarParentesis("{[]}")}`);
+        console.log(`"([{}])" -> ${validarParentesis("([{}])")}`);
+        
+    </script>
+</body>
+</html>

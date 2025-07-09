@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13</title>
+</head>
+<body>
+    <script>
+        const esNumeroPerfecto = (numero) => {
+        if (numero <= 1) {
+            return false;
+        }
+
+        let sumaDeDivisores = 0;
+
+        for (let i = 1; i < numero; i++) {
+            if (numero % i === 0) {
+            sumaDeDivisores += i;
+            }
+        }
+        return sumaDeDivisores === numero;
+        };
+
+        console.log("...Verificando números perfectos...");
+        console.log("¿Es 6 un número perfecto?", esNumeroPerfecto(6));
+
+    </script>
+</body>
+</html>

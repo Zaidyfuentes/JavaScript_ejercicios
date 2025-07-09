@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 17</title>
+</head>
+<body>
+    <script>
+        const organizarCoordenadas = (cor) => {
+            const nuevas = [];
+
+            for (const par of cor) {
+                const [x, y] = par;
+                const objCoord = { x, y };
+                nuevas.push(objCoord);
+            }
+            return nuevas;
+        };
+
+        console.log("...organizar Coordenadas...");
+
+        let coordenadas_ori = [[10, 20], [30, 40], [5, 15]];
+        console.log("Coordenadas originales:", coordenadas_ori);
+        let coordenadasObjeto = organizarCoordenadas(coordenadas_ori);
+        console.log("Coordenadas transformadas (array de objetos):", coordenadasObjeto);
+
+    </script>
+</body>
+</html>

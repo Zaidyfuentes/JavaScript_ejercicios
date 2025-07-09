@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 27</title>
+</head>
+<body>
+    <script>
+        const catalogo = [
+        { id: 1, nombre: "Laptop Pro", precio: 1200.00 },
+        { id: 2, nombre: "Mouse Óptico", precio: 25.50 },
+        { id: 3, nombre: "Teclado Mecánico", precio: 75.00 },
+        { id: 4, nombre: "Monitor UltraWide", precio: 300.00 },
+        { id: 5, nombre: "Auriculares Gaming", precio: 90.00 }
+        ];
+        let carrito = [];
+
+        const IVA_PERCENTAJE = 0.19;
+        const DESCUENTO_MINIMO_COMPRA = 200.00;
+        const DESCUENTO_PERCENTAJE = 0.10;
+
+        const mostrarCatalogo = () => {//mostrar el Catálogo
+        console.log("...catálogo de productos...");
+        if (catalogo.length === 0) {
+            console.log("El catálogo está vacío.");
+            return;
+        }
+        catalogo.forEach(producto => {
+            console.log(`ID: ${producto.id} | ${producto.nombre} | Precio: $${producto.precio.toFixed(2)}`);
+        });
+        };
+
+        //agregar Producto al Carrito
+        const agregarAlCarrito = (idProducto, cantidad = 1) => {
+        if (cantidad <= 0 || !Number.isInteger(cantidad)) {
+            console.error(`Error: La cantidad debe ser un número entero positivo.`);
+            return false;
+        }
+
+        //buscar el producto en el catálogo
+        const productoEnCatalogo = catalogo.find(prod => prod.id === idProducto);
+
+        if (!productoEnCatalogo) {
+            console.error(`Error: Producto con ID ${idProducto} no encontrado en el catálogo.`);
+            return false;
+        }
+
+        //verificar si el producto ya está en el carrito
+        const itemEnCarrito = carrito.find(item => item.idProducto === idProducto);
+
+        if (itemEnCarrito) {
+            itemEnCarrito.cantidad += cantidad;
+            console.log(`➕ Se actualizó la cantidad de '${productoEnCatalogo.nombre}' a ${itemEnCarrito.cantidad}.`);
+            carrito.push({
+            idProducto: productoEnCatalogo.id,
+            nombre: productoEnCatalogo.nombre,
+            precio: productoEnCatalogo.precio,
+            cantidad: cantidad
+            });
+            console.log(`Se agregó '${productoEnCatalogo.nombre}' x ${cantidad} al carrito.`);
+        }
+        return true;
+        };
+
+        const mostrarCarrito = () => { //mostrar el Carrito Actual
+        console.log("...Tu Carrito de Compras...");
+        if (carrito.length === 0) {
+            console.log("El carrito está vacío.");
+            return;
+        }
+        carrito.forEach(item => {
+            console.log(`${item.nombre} (x${item.cantidad}) - Subtotal Item: $${(item.precio * item.cantidad).toFixed(2)}`);
+        });
+        };
+
+        const calcularSubtotal = () => {
+        const subtotal = carrito.reduce((acc, item) => {
+            return acc + (item.precio * item.cantidad);
+        }, 0);
+        return subtotal;
+        };
+
+        const calcularDescuento = (subtotal) => {
+        if (subtotal >= DESCUENTO_MINIMO_COMPRA) {
+            return subtotal * DESCUENTO_PERCENTAJE;
+        }
+        return 0;
+        };
+
+        const calcularIVA = (montoSinIVA) => {
+        return montoSinIVA * IVA_PERCENTAJE;
+        };
+
+        const calcularTotalFinal = () => {
+        const subtotal = calcularSubtotal();
+        const descuento = calcularDescuento(subtotal);
+        const subtotalDescontado = subtotal - descuento;
+        const ivaCalculado = calcularIVA(subtotalDescontado);
+        const totalPagar = subtotalDescontado + ivaCalculado;
+
+        console.log("...Resumen de Compra...");
+        console.log(`Subtotal:                 $${subtotal.toFixed(2)}`);
+        if (descuento > 0) {
+            console.log(`Descuento (${(DESCUENTO_PERCENTAJE * 100).toFixed(0)}%):       -$${descuento.toFixed(2)}`);
+            console.log(`Subtotal con Descuento:   $${subtotalDescontado.toFixed(2)}`);
+        }
+        console.log(`IVA (${(IVA_PERCENTAJE * 100).toFixed(0)}%):                   +$${ivaCalculado.toFixed(2)}`);
+        console.log(`------------------------------`);
+        console.log(`Total a Pagar:            $${totalPagar.toFixed(2)}`);
+        console.log(`------------------------------`);
+
+        return {
+            subtotal,
+            descuento,
+            subtotalDescontado,
+            ivaCalculado,
+            totalPagar
+        };
+        };
+
+        console.log("...compras...");
+
+        mostrarCatalogo();
+
+        agregarAlCarrito(1, 1);
+        agregarAlCarrito(2, 2);
+
+        mostrarCarrito();
+        calcularTotalFinal();
+
+    </script>
+</body>
+</html>
